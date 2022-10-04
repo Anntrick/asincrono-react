@@ -10,6 +10,7 @@ const Home = () => {
     }, [])
 
     const getCharacters = async () => {
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
         characters = await axios.get('https://rickandmortyapi.com/api/character')
         console.log( characters.data.results[0].name)
         char = characters.data.results[0] 
