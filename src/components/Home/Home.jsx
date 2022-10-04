@@ -10,6 +10,8 @@ const Home = () => {
     }, [])
 
     const getCharacters = async () => {
+        axios.defaults.baseURL = 'http://github.io';
+        axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
         axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
         characters = await axios.get('https://rickandmortyapi.com/api/character')
         console.log( characters.data.results[0].name)
