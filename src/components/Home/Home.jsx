@@ -1,26 +1,30 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
+import './Home.scss'
 const Home = () => {
-    let characters = []
-    let char = {id: 0, name: '', status: '', species: '', others: {}}
-    let { id, name, status, species, others } = char
+    const [characters, setCharacters] = useState()
 
     useEffect(() => {
-        getCharacters()
+        
+            axios.get('https://rickandmortyapi.com/api/character')
+            .then(resp=> setCharacters(resp.data.results))
+        
     }, [])
 
-    const getCharacters = async () => {
-        axios.defaults.baseURL = 'http://github.io';
-        axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
-        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-        characters = await axios.get('https://rickandmortyapi.com/api/character')
-        console.log( characters.data.results[0].name)
-        char = characters.data.results[0] 
-        console.log(name)
-    }
-
     return (
-        <div></div>
+        <div className="Home">
+            {
+                characters?.map((character) => {
+                    return <div className="character-card" key={character.id}>
+                            <h3>{character.name}</h3>
+                            <p>estado: {character.status}</p>
+                            <p>especie: {character.species}</p>
+                            <p>tipo: {character.type}</p>
+                        </div>
+                })
+            }
+
+        </div>
     )
 }
 
