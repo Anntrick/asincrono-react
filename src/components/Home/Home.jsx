@@ -5,10 +5,8 @@ const Home = () => {
     const [characters, setCharacters] = useState()
 
     useEffect(() => {
-        
-            axios.get('https://rickandmortyapi.com/api/character')
+        axios.get('https://rickandmortyapi.com/api/character')
             .then(resp=> setCharacters(resp.data.results))
-        
     }, [])
 
     return (
